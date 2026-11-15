@@ -1,0 +1,25 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: Ruff format
+        entry: uv run --no-sync ruff format
+        language: system
+        types: [python]
+      - id: ruff-lint
+        name: Ruff lint
+        entry: uv run --no-sync ruff check --fix
+        language: system
+        types: [python]
+      - id: ty
+        name: ty type check
+        entry: uv run --no-sync ty check
+        language: system
+        types: [python]
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: uv run --no-sync pytest -q
+        language: system
+        types: [python]
+        pass_filenames: false
