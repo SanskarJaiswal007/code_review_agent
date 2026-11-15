@@ -23,6 +23,19 @@
 - Root `pyproject.toml` defines the uv workspace and development dependencies;
   `ruff.toml`, `ty.toml`, and `.pre-commit-config.yaml` define quality checks.
 
+## OpenSpec change workflow
+
+- Before changing application or package code, create an OpenSpec change under
+  `openspec/changes/`. Write the proposal, design, relevant spec changes, and
+  implementation tasks so the intended behavior and scope are reviewable.
+- Implement the code against that change and keep its design, specs, and tasks
+  updated if the implementation changes direction. Mark tasks complete only
+  after the work and verification are finished.
+- After implementation and verification, report the result to the developer,
+  including the change name and any remaining limitations. Ask the developer
+  to close or archive the OpenSpec change before moving to the next change;
+  archive it when they direct you to do so.
+
 ## Python workflow
 
 - Use Python 3.14 and install the workspace with `uv sync`.
