@@ -2,11 +2,19 @@
 
 ## Structure
 
+- Put every executable application, service, worker, and CLI entry point under
+  `apps/`. Application packages may compose reusable libraries and contain
+  deployment or runtime configuration specific to that application.
+- Put reusable libraries and components under `packages/`. A package should be
+  usable by more than one app without importing from `apps/` or embedding one
+  application's business logic. Apps may depend on packages; packages must not
+  depend on apps.
 - `packages/harness/` is the reusable LangChain and LangGraph harness. `core.py`
   wraps a default tool-calling agent or a supplied graph, with checkpointing and
   explicit LangGraph store access. `mcp_tools.py` connects to HTTP MCP servers
   and supports bearer tokens or custom authentication headers. Keep the harness
-  independent of Azure DevOps and pull-request-specific workflows.
+  independent of Azure DevOps and pull-request-specific workflows so another
+  application can use it as a general agent harness.
 - `apps/mcp/` is the Azure DevOps MCP gateway. It selects a local or remote
   upstream and exposes tools through a local HTTP MCP endpoint.
 - `apps/harness-worker/` is the worker app scaffold. It does not yet run a code
