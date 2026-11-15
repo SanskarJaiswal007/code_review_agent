@@ -367,12 +367,14 @@ name = "harness"
 version = "0.1.0"
 source = { editable = "packages/harness" }
 dependencies = [
+    { name = "fastmcp" },
     { name = "langchain" },
     { name = "langgraph" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "fastmcp", specifier = ">=2.3.0rc1" },
     { name = "langchain", specifier = ">=1.5.0" },
     { name = "langgraph", specifier = ">=1.2.22" },
 ]
