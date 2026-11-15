@@ -26,17 +26,20 @@ class Harness:
         system_prompt: str | None = None,
         workflow: Any = None,
     ) -> None:
-        if workflow is None and model is None:
-            raise ValueError("Provide either a model or a compiled workflow")
         self.checkpointer = checkpointer
         self.store = store
-        self.graph = workflow if workflow is not None else create_agent(
-            model=model,
-            tools=list(tools),
-            system_prompt=system_prompt,
-            checkpointer=checkpointer,
-            store=store,
-        )
+        if workflow is not None:
+            self.graph = workflow
+        else:
+            if model is None:
+                raise ValueError("Provide either a model or a compiled workflow")
+            self.graph = create_agent(
+                model=model,
+                tools=list(tools),
+                system_prompt=system_prompt,
+                checkpointer=checkpointer,
+                store=store,
+            )
 
     def _config(self, thread_id: str | None, config: dict | None) -> dict:
         result = dict(config or {})
