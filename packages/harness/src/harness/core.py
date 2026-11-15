@@ -26,6 +26,7 @@ class Harness:
         system_prompt: str | None = None,
         workflow: Any = None,
     ) -> None:
+        self.graph: Any
         self.checkpointer = checkpointer
         self.store = store
         if workflow is not None:
@@ -53,16 +54,24 @@ class Harness:
             raise ValueError("A thread_id is required when using a checkpointer")
         return result
 
-    def invoke(self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any) -> Any:
+    def invoke(
+        self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any
+    ) -> Any:
         return self.graph.invoke(input, config=self._config(thread_id, config), **kwargs)
 
-    async def ainvoke(self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any) -> Any:
+    async def ainvoke(
+        self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any
+    ) -> Any:
         return await self.graph.ainvoke(input, config=self._config(thread_id, config), **kwargs)
 
-    def stream(self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any):
+    def stream(
+        self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any
+    ):
         return self.graph.stream(input, config=self._config(thread_id, config), **kwargs)
 
-    def astream(self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any):
+    def astream(
+        self, input: Any, *, thread_id: str | None = None, config: dict | None = None, **kwargs: Any
+    ):
         return self.graph.astream(input, config=self._config(thread_id, config), **kwargs)
 
     def put_memory(self, namespace: tuple[str, ...], key: str, value: dict[str, Any]) -> None:
@@ -78,7 +87,9 @@ class Harness:
         item = self.store.get(namespace, key)
         return None if item is None else item.value
 
-    def search_memories(self, namespace: tuple[str, ...], *, query: str | None = None, limit: int = 10):
+    def search_memories(
+        self, namespace: tuple[str, ...], *, query: str | None = None, limit: int = 10
+    ):
         """Search a memory namespace using the store's search capability."""
         if self.store is None:
             raise ValueError("Configure a store before using long-term memory")

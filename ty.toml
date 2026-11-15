@@ -1,0 +1,6 @@
+[environment]
+python = ".venv"
+python-version = "3.14"
+
+[src]
+include = ["packages/harness/src", "apps/mcp/src", "apps/harness-worker/src"]
