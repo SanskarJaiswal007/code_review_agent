@@ -1,5 +1,5 @@
 [project]
-name = "mcp"
+name = "mcp-app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -9,10 +9,12 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "fastmcp>=2.3.0rc1",
+    "mcp<2",
+    "uvicorn>=0.30",
 ]
 
 [project.scripts]
-mcp = "mcp:main"
+mcp-app = "mcp_app:main"
 
 [build-system]
 requires = ["uv_build>=0.13.8,<0.14.0"]

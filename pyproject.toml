@@ -14,7 +14,7 @@ dependencies = [
 [tool.uv.workspace]
 members = [
     "packages/*",
-    "apps/*"
+    "apps/*",
 ]
 
 [tool.uv.sources]
