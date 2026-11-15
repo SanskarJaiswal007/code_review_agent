@@ -1,0 +1,22 @@
+[project]
+name = "harness_worker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "SANSKARJAISWAL", email = "aaryanjaiswal2136@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "harness",
+]
+
+[project.scripts]
+harness-worker = "harness_worker:main"
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+harness = { workspace = true }

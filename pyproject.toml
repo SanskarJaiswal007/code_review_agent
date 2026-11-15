@@ -1,0 +1,26 @@
+[project]
+name = "code_review_agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "SANSKARJAISWAL", email = "aaryanjaiswal2136@gmail.com" }
+]
+dependencies = [
+    "harness",
+]
+
+
+[tool.uv.workspace]
+members = [
+    "packages/*",
+    "apps/*"
+]
+
+[tool.uv.sources]
+harness = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.5",
+]
