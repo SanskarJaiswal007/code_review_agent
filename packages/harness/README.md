@@ -31,3 +31,21 @@ the store; passing a store alone does not create memories. The harness exposes
 `MCPTools` remains
 available for direct access to the Azure DevOps gateway. To use its tools in
 the agent, adapt the discovered MCP schemas and calls to LangChain tools.
+
+For an authenticated HTTP MCP endpoint, provide a bearer token or custom
+headers when constructing `MCPTools`:
+
+```python
+import os
+from harness import MCPTools
+
+mcp = MCPTools(
+    url="https://mcp.example.com/mcp/",
+    bearer_token=lambda: os.environ["MCP_ACCESS_TOKEN"],
+)
+tools = await mcp.list_tools()
+```
+
+The token provider is called for each new connection. Keep credentials in a
+secret manager or environment, not in source control. For another HTTP auth
+scheme, pass `headers={...}` instead of `bearer_token`.
